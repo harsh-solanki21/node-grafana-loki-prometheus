@@ -10,7 +10,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN pnpm run build
+RUN npx prisma generate && pnpm run build
 
 EXPOSE 5000
 
