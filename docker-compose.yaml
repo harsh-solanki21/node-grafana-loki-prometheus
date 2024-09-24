@@ -1,8 +1,9 @@
 version: "3.8"
 
 services:
-  app:
+  api:
     build: .
+    container_name: api
     ports:
       - "5000:5000"
     environment:
@@ -14,6 +15,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: postgres_db
     environment:
       POSTGRES_USER: harsh
       POSTGRES_PASSWORD: harsh21
@@ -23,6 +25,7 @@ services:
 
   prometheus:
     image: prom/prometheus
+    container_name: prometheus
     ports:
       - "9090:9090"
     volumes:
@@ -30,11 +33,13 @@ services:
 
   loki:
     image: grafana/loki
+    container_name: loki
     ports:
       - "3100:3100"
 
   grafana:
     image: grafana/grafana
+    container_name: grafana
     ports:
       - "3000:3000"
     environment:
