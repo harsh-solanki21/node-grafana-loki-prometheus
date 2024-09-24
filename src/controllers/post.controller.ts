@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../app";
+import logger from "../configs/logger";
 
 export class PostController {
   async listPosts(_: Request, res: Response) {
@@ -11,6 +12,7 @@ export class PostController {
       });
       res.status(200).json(posts);
     } catch (error: any) {
+      logger.error("Error listing posts", { error: error.message });
       throw new Error(error);
     }
   }
@@ -27,6 +29,7 @@ export class PostController {
       }
       res.status(200).json(post);
     } catch (error: any) {
+      logger.error("Error getting a post", { error: error.message });
       throw new Error(error);
     }
   }
@@ -42,6 +45,7 @@ export class PostController {
       });
       res.status(200).json(post);
     } catch (error: any) {
+      logger.error("Error creating post", { error: error.message });
       throw new Error(error);
     }
   }
@@ -56,6 +60,7 @@ export class PostController {
       });
       res.status(200).json(post);
     } catch (error: any) {
+      logger.error("Error updating post", { error: error.message });
       throw new Error(error);
     }
   }
@@ -73,6 +78,7 @@ export class PostController {
       });
       res.status(200).json(post);
     } catch (error: any) {
+      logger.error("Error liking a post", { error: error.message });
       throw new Error(error);
     }
   }
@@ -90,6 +96,7 @@ export class PostController {
       ]);
       res.status(200).json({ message: "Post and comments deleted" });
     } catch (error: any) {
+      logger.error("Error deleting post", { error: error.message });
       throw new Error(error);
     }
   }

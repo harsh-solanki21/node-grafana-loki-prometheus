@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../app";
+import logger from "../configs/logger";
 
 export class CommentController {
   async listComments(req: Request, res: Response) {
@@ -11,6 +12,7 @@ export class CommentController {
       });
       res.status(200).json(comments);
     } catch (error: any) {
+      logger.error("Error listing comments", { error: error.message });
       throw new Error(error);
     }
   }
@@ -27,6 +29,7 @@ export class CommentController {
       }
       res.status(200).json(comment);
     } catch (error: any) {
+      logger.error("Error getting a comment", { error: error.message });
       throw new Error(error);
     }
   }
@@ -42,6 +45,7 @@ export class CommentController {
       });
       res.status(200).json(comment);
     } catch (error: any) {
+      logger.error("Error creating comment", { error: error.message });
       throw new Error(error);
     }
   }
@@ -56,6 +60,7 @@ export class CommentController {
       });
       res.status(200).json(comment);
     } catch (error: any) {
+      logger.error("Error updating comment", { error: error.message });
       throw new Error(error);
     }
   }
@@ -68,6 +73,7 @@ export class CommentController {
       });
       res.status(200).json({ message: "Comment deleted" });
     } catch (error: any) {
+      logger.error("Error deleting comment", { error: error.message });
       throw new Error(error);
     }
   }
