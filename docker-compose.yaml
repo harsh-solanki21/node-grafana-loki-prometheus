@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://harsh:harsh21@postgres:5432/logging
+    depends_on:
+      - postgres
+      - prometheus
+      - loki
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: harsh
+      POSTGRES_PASSWORD: harsh21
+      POSTGRES_DB: logging
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+
+  loki:
+    image: grafana/loki
+    ports:
+      - "3100:3100"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+
+volumes:
+  postgres_data:

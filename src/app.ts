@@ -1,7 +1,9 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import cors, { CorsOptions } from "cors";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
+import recordMetrics from "./middlewares/metrics";
+import { notFoundHandler, errorHandler } from "./middlewares/errorHandler";
 import loadRoutes from "./routes/index.routes";
 
 dotenv.config();
@@ -14,11 +16,11 @@ const corsOptions: CorsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(recordMetrics);
 
 loadRoutes(app);
 
-app.all("*", (req: Request, res: Response) => {
-  res.status(404).json({ error: `Route ${req.originalUrl} not found` });
-});
+app.use(notFoundHandler);
+app.use(errorHandler);
 
 export { app, prisma };
