@@ -44,4 +44,8 @@ docker-compose --env-file .env up --build
 
 <br />
 
-> This README provides a comprehensive guide for setting up and running the project, including steps for starting the application, associated services, and information about the available features and endpoints.
+## Grafana and Prometheus Dashboard
+
+![grafana](https://github.com/user-attachments/assets/1ffa9610-d117-4d92-9e7e-3b1bd5ee22f1)
+
+![prometheus](https://github.com/user-attachments/assets/617a1c0d-56b9-4074-aa05-b899127032b5)
