@@ -13,7 +13,7 @@ export class CommentController {
       res.status(200).json(comments);
     } catch (error: any) {
       logger.error("Error listing comments", { error: error.message });
-      throw new Error(error);
+      res.status(404).json({ error: "Something went wrong!" });
     }
   }
 
@@ -30,7 +30,7 @@ export class CommentController {
       res.status(200).json(comment);
     } catch (error: any) {
       logger.error("Error getting a comment", { error: error.message });
-      throw new Error(error);
+      res.status(404).json({ error: "Something went wrong!" });
     }
   }
 
@@ -46,7 +46,7 @@ export class CommentController {
       res.status(200).json(comment);
     } catch (error: any) {
       logger.error("Error creating comment", { error: error.message });
-      throw new Error(error);
+      res.status(404).json({ error: "Something went wrong!" });
     }
   }
 
@@ -61,7 +61,7 @@ export class CommentController {
       res.status(200).json(comment);
     } catch (error: any) {
       logger.error("Error updating comment", { error: error.message });
-      throw new Error(error);
+      res.status(404).json({ error: "Something went wrong!" });
     }
   }
 
@@ -74,7 +74,7 @@ export class CommentController {
       res.status(200).json({ message: "Comment deleted" });
     } catch (error: any) {
       logger.error("Error deleting comment", { error: error.message });
-      throw new Error(error);
+      res.status(404).json({ error: "Something went wrong!" });
     }
   }
 }

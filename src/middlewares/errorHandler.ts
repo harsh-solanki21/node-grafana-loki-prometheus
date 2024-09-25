@@ -12,6 +12,6 @@ export const errorHandler = (
   res: Response,
   _next: NextFunction
 ) => {
-  logger.error(err.stack);
+  logger.error(err.message);
   res.status(500).json({ error: "Internal Server Error" });
 };
