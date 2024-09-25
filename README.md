@@ -31,7 +31,8 @@ This project is a Node.js application that demonstrates integration with Grafana
 ## Running the Application
 
 1. Run to start the application and associated services (Postgres, Grafana, Loki, Prometheus)
-   `docker-compose --env-file .env up --build`
+
+- `docker-compose --env-file .env up --build`
 
 2. Access the application:
 
