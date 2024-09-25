@@ -6,7 +6,7 @@ const logConfig = {
   transports: [
     new transports.Console(),
     new LokiTransport({
-      host: "http://192.168.29.238:3100", // Your IP address
+      host: `http://${process.env.IP_ADDRESS}:3100`, // Your IP address
       labels: { app: "node-app" },
       json: true,
       format: format.json(),
