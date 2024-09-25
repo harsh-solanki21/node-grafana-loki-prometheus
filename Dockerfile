@@ -17,9 +17,7 @@ RUN pnpm run build
 
 EXPOSE 5000
 
-# Copy the entrypoint script
 COPY entrypoint.sh /usr/src/app/entrypoint.sh
 RUN chmod +x /usr/src/app/entrypoint.sh
 
-# Use the entrypoint script
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
