@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import logger from "../configs/logger";
-import { httpRequestDurationMicroseconds } from "../configs/metrics";
+import {
+  httpRequestCounter,
+  httpRequestDurationMicroseconds,
+} from "../configs/metrics";
 
 function recordMetrics(req: Request, res: Response, next: NextFunction) {
   const start = Date.now();
@@ -9,6 +12,8 @@ function recordMetrics(req: Request, res: Response, next: NextFunction) {
     logger.info(
       `${req.method} ${req.originalUrl} ${res.statusCode} ${duration}ms`
     );
+
+    httpRequestCounter.inc();
 
     httpRequestDurationMicroseconds
       .labels(
